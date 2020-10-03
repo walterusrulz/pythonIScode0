@@ -22,6 +22,7 @@ bKnight = 9
 bQueen = 10
 bKing = 11
 empty = 12
+firstMove = True
 
 # number of pieces
 diffPieces = 12
@@ -134,27 +135,61 @@ def printBoard(state):
 			print("---", end="")
 		print("--")
 
+# returns a boolean indicating whether a move is possible or not
+def actionisvalid(state,  position):
+	col = position.col
+	row = position.row
+	size = len(state.m_board[0])
+	mine = range (0,6)
+	
+	if row in range(0,size-1) and col in range(0,size-1) and state.m_board[row][col] not in mine:
+		return True
+	else:
+		return False
 
-def getPossibleMoves(state):
-	legalMovesList = []
-	actPos = Position(state.m_agentPos.row, state.m_agentPos.col)
-	nextPos = actPos.copy()
-	if state.m_agent == 0:
-		while state.m_board[nextPos.row][nextPos.col] not in range(5, 12) and not nextPos.col == len(state.m_board[0]):
-			nextPos.row += 1
-			addedPos = nextPos.copy()
-			legalMovesList.append(addedPos)
-		print("Not implemented")
+
+def generateactions(state):
+	actions = []
+	currentcol = state.m_agentPos.col
+	currentrow = state.m_agentPos.row
+	final = 2
+	if   state.m_agent == 0:
+		# generate possible column positions, one forward, 2 1-steps on diagonal capture
+		for i in range(currentcol-1, currentcol+1):
+			if i == currentcol:
+				for n in range(1,final):
+					candidate = Position(currentrow+n,i)
+					if actionisvalid(state, candidate):
+						actions.append(candidate)
+				final = 1
+			else:
+				candidate = Position(currentrow + 1, i)
+				if state.m_board[currentrow+1][i] in range(6,12) and actionisvalid(state, candidate):
+					actions.append(candidate)
+
 	elif state.m_agent == 1:
-		print("Not implemented")
-	return legalMovesList
+		print("Not implemented yet")
+	elif state.m_agent == 2:
+		print("Not implemented yet")
+	elif state.m_agent == 3:
+		print("Not implemented yet")
+	elif state.m_agent == 4:
+		print("Not implemented yet")
+	elif state.m_agent == 5:
+		print("Not implemented yet")
+	else:
+		print("Trying to use blacks, or unknown pieces")
+	return actions
+
 
 # main to test the methods
 
 if __name__ == '__main__':
 
-	st = getProblemInstance(8, 1.0, 1771, wRook)
+	st = getProblemInstance(8, 1.0, 1771, wPawn)
 	print(st.m_board)
-		
 	printBoard(st)
+	actions = generateactions(st)
+	print(actions)
+
 
