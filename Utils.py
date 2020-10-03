@@ -152,8 +152,8 @@ def generateactions(state):
 	actions = []
 	currentcol = state.m_agentPos.col
 	currentrow = state.m_agentPos.row
-	final = 2
-	if   state.m_agent == 0:
+	final = 3
+	if state.m_agent == 0:
 		# generate possible column positions, one forward, 2 1-steps on diagonal capture
 		for i in range(currentcol-1, currentcol+1):
 			if i == currentcol:
@@ -161,7 +161,7 @@ def generateactions(state):
 					candidate = Position(currentrow+n,i)
 					if actionisvalid(state, candidate):
 						actions.append(candidate)
-				final = 1
+				final = 2
 			else:
 				candidate = Position(currentrow + 1, i)
 				if state.m_board[currentrow+1][i] in range(6,12) and actionisvalid(state, candidate):
@@ -186,10 +186,11 @@ def generateactions(state):
 
 if __name__ == '__main__':
 
-	st = getProblemInstance(8, 1.0, 1771, wPawn)
+	st = getProblemInstance(8, 0.2, 1771, wPawn)
 	print(st.m_board)
 	printBoard(st)
 	actions = generateactions(st)
-	print(actions)
+	for i in actions:
+		print(i)
 
 
