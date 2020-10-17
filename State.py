@@ -3,7 +3,7 @@
 
 import sys
 import copy
-# import Utils
+import Utils
 
 class State:
 	m_board = None
@@ -48,15 +48,11 @@ class State:
 		return newState
 		
 	# apply a given action over the current state -which remains unmodified. Return a new state
-	# applyAction() returns a new state
+	
 	def applyAction(self,action):
 		newState = self.copy()
-		# initial position in copy state is cleared
-		newState.m_board[action.m_initPos.row][action.m_initPos.col] = 12 #Utils.empty
-		# the agent, which copied or not, remains teh same, is placed in its new state
+		newState.m_board[action.m_initPos.row][action.m_initPos.col] = Utils.empty
 		newState.m_board[action.m_finalPos.row][action.m_finalPos.col] = newState.m_agent
-		# already placed, but nonetheless let's update the agent Position, since there may be
-		# more than one unit of the type of the agent ( ex. agent is a wPawn, but which one?)
 		newState.m_agentPos = action.m_finalPos
 		
 		return newState
