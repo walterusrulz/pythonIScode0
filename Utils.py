@@ -116,11 +116,11 @@ def printBoard(state):
 	for r in range(size):
 		print("% 2d|" % (r), end="")
 		for c in range(size): 
-			if ((r==state.m_agentPos.row) and (c==state.m_agentPos.col)):
+			if (r == state.m_agentPos.row) and (c == state.m_agentPos.col):
 				print("*" + letters[state.m_board[r][c]]+"|", end="")
 			else:
 				print(" " + letters[state.m_board[r][c]]+"|", end="")
-		# botton row
+		# bottom row
 		print("  ")
 		for c in range(size): 
 			print("---", end="")
@@ -132,7 +132,8 @@ def printBoard(state):
 
 if __name__ == '__main__':
 
-	st = getProblemInstance(8, 1.0, 1771, wRook)
+	st = getProblemInstance(8, 1.0, 1771, wKing)
 	print(st.m_board)
+
 		
 	printBoard(st)

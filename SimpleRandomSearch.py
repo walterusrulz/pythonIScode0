@@ -16,6 +16,8 @@ from State import State
 from Piece import Piece
 from Rook import Rook
 from Pawn import Pawn
+from King import King
+from Queen import Queen
 
 class SimpleRandomSearch:
 	# member variables
@@ -44,6 +46,15 @@ class SimpleRandomSearch:
 			self.m_piece = Rook(0)
 		elif s0.m_agent == Utils.bRook:
 			self.m_piece = Rook(1)
+		elif s0.m_agent == Utils.wKing:
+			self.m_piece = King(0)
+		elif s0.m_agent == Utils.bKing:
+			self.m_piece = King(1)
+		elif s0.m_agent == Utils.wQueen:
+			self.m_piece = Queen(0)
+		elif s0.m_agent == Utils.bQueen:
+			self.m_piece = Queen(1)
+
 		else:
 			# define the rest of pieces
 			print("Chess piece not implemented")
