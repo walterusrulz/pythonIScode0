@@ -11,7 +11,7 @@ from State import State
 wPawn = 0
 wRook = 1
 wBishop = 2
-wKnight = 33
+wKnight = 3
 wQueen = 4
 wKing = 5
 bPawn = 6

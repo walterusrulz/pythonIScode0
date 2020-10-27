@@ -15,4 +15,4 @@ class Knight(Piece):
 
     def getPossibleActions(self, state):
 
-        return self.knight_moves(self, state)
+        return self.knight_moves(state)

@@ -17,7 +17,6 @@ class Queen(Piece):
 
     # this method must be completed with all the possible pieces
     def getPossibleActions(self, state):
-        print("Inside possibleActions")
         l = []
 
         l = self.getHorizontalLeftMoves(state)
