@@ -14,7 +14,10 @@ class Bishop(Piece):
             self.m_type = Utils.bBishop
 
     def getPossibleActions(self, state):
-        ln = []
-        ln += self.getVerticalDownMoves()
+        l = []
+        l = self.getUpLeftMoves(state)
+        l += self.getUpRightMoves(state)
+        l += self.getDownLeftMoves(state)
+        l += self.getDownRightMoves(state)
 
-        return ln
+        return l

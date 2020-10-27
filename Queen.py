@@ -24,5 +24,9 @@ class Queen(Piece):
         l += self.getHorizontalRightMoves(state)
         l += self.getVerticalDownMoves(state)
         l += self.getVerticalUpMoves(state)
+        l = self.getUpLeftMoves(state)
+        l += self.getUpRightMoves(state)
+        l += self.getDownLeftMoves(state)
+        l += self.getDownRightMoves(state)
 
         return l

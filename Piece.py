@@ -8,7 +8,6 @@ from Action import Action
 from State import State
 
 
-
 class Piece:
     # this method must be completed with all the possible pieces
 
@@ -23,7 +22,7 @@ class Piece:
     # horizontal left moves
     def getHorizontalLeftMoves(self, state):
         l = []
-        #agentColor = self.m_color
+        # agentColor = self.m_color
         agentColor = 0
         row0, col0 = state.m_agentPos.row, state.m_agentPos.col
 
@@ -100,6 +99,97 @@ class Piece:
 
         return l
 
+    def getUpLeftMoves(self, state):
+        l = []
+        agentColor = self.m_color
+        row0, col0 = state.m_agentPos.row, state.m_agentPos.col;
+
+        busyCell = False
+        r_range = range(row0 - 1, -1, -1)
+        c_range = range(col0 - 1, -1, -1)
+        x = zip(r_range, c_range)
+        for r, c in x:
+            if not busyCell:
+                if state.m_board[r][c] == Utils.empty:  # add action
+                    action = Action(state.m_agentPos, Position(r, c))
+                    l.append(action)
+                else:
+                    busyCell = True
+                    if agentColor != Utils.getColorPiece(state.m_board[r][c]):  # capture piece
+                        action = Action(state.m_agentPos, Position(r, c))
+                        l.append(action)
+
+        return l
+
+    def getUpRightMoves(self, state):
+        l = []
+        agentColor = self.m_color
+        row0, col0 = state.m_agentPos.row, state.m_agentPos.col;
+
+        busyCell = False
+        r_range = range(row0 - 1, -1, -1)
+        c_range = range(col0 + 1, state.m_boardSize)
+        x = zip(r_range, c_range)
+        for r, c in x:
+            if not busyCell:
+                if state.m_board[r][c] == Utils.empty:  # add action
+                    action = Action(state.m_agentPos, Position(r, c))
+                    l.append(action)
+                else:
+                    busyCell = True
+                    if agentColor != Utils.getColorPiece(state.m_board[r][c]):  # capture piece
+                        action = Action(state.m_agentPos, Position(r, c))
+                        l.append(action)
+
+        return l
+
+    def getDownLeftMoves(self, state):
+        l = []
+        agentColor = self.m_color
+        row0, col0 = state.m_agentPos.row, state.m_agentPos.col;
+
+        busyCell = False
+        r_range = range(row0 + 1, state.m_boardSize)
+        c_range = range(col0 - 1, -1, -1)
+        x = zip(r_range, c_range)
+        for r, c in x:
+            if not busyCell:
+                if state.m_board[r][c] == Utils.empty:  # add action
+                    action = Action(state.m_agentPos, Position(r, c))
+                    l.append(action)
+                else:
+                    busyCell = True
+                    if agentColor != Utils.getColorPiece(state.m_board[r][c]):  # capture piece
+                        action = Action(state.m_agentPos, Position(r, c))
+                        l.append(action)
+
+        return l
+
+    """Done?"""
+
+    def getDownRightMoves(self, state):
+        l = []
+        agentColor = self.m_color
+        row0, col0 = state.m_agentPos.row, state.m_agentPos.col;
+
+        busyCell = False
+        r_range = range(row0 + 1, state.m_boardSize)
+        c_range = range(col0 + 1, state.m_boardSize)
+        x = zip(r_range, c_range)
+        for r, c in x:
+            if not busyCell:
+                if state.m_board[r][c] == Utils.empty:  # add action
+                    action = Action(state.m_agentPos, Position(r, c))
+                    l.append(action)
+                else:
+                    busyCell = True
+                    if agentColor != Utils.getColorPiece(state.m_board[r][c]):  # capture piece
+                        action = Action(state.m_agentPos, Position(r, c))
+                        l.append(action)
+
+        return l
+
+
     def get_immediate_moves(self, state):
         l = []
         agentColor = self.m_color
@@ -123,4 +213,26 @@ class Piece:
 
         return l
 
-
+    def knight_moves(self, state):
+        l = []
+        agentColor = self.m_color
+        row0, col0 = state.m_agentPos.row, state.m_agentPos.col
+        final_element = state.m_boardSize
+        r_range = [-2, -2, -1, -1, 1, 1, 2, 2]
+        c_range = [1, -1, 2, -2, 2, -2, 1, -1]
+        valid = range(0, final_element)
+        x = zip(r_range, c_range)
+        for r_gen, c_gen in x:
+            r, c = row0 + r_gen, col0 + c_gen;
+            if r in valid and c in valid:
+                if state.m_board[r][c] == Utils.empty:  # add action
+                    # print("Empty square")
+                    action = Action(state.m_agentPos, Position(r, c))
+                    l.append(action)
+                else:
+                    if agentColor != Utils.getColorPiece(state.m_board[r][c]):  # capture piece
+                        # print("Opponent square")
+                        # print(r, c)
+                        action = Action(state.m_agentPos, Position(r, c))
+                        l.append(action)
+        return l
