@@ -1,13 +1,14 @@
 import sys
 import Utils
 from SimpleRandomSearch import SimpleRandomSearch
+from BreadthFirst import BreadthFirst
 
 ######ENTRY POINT#######################################################################################################
 
 
 if __name__ == '__main__':
     # print(len(sys.argv))
-    algos = ["SimpleRandom","In-Progress"]
+    algos = ["SimpleRandom","BreadthFirst"]
     if (len(sys.argv) != 7):
         print("\n**Sorry, correct usage require 5 params:");
         print("Board size: int.");
@@ -15,7 +16,7 @@ if __name__ == '__main__':
         print("Seed1: int. To initialize the problem instance random number generator (for reproducibility)");
         print("Agent: {0,1,2,3,4,5} standing for white pawn, rook, bishop, knight, queen or king.");
         print("Seed2: int. To initialize the Random Search instance random number generator (for reproducibility)");
-        print("Search algorithm: available SimpleRandom, In-progress")
+        print("Search algorithm: available SimpleRandom, BreadthFirst")
         sys.exit()
     else:
         size = int(sys.argv[1])
@@ -50,7 +51,8 @@ if __name__ == '__main__':
             srs = SimpleRandomSearch(state, seed2)
             finalState = srs.doSearch()
         elif algo == algos[1]:
-            print("Not implemented")
+            srs = BreadthFirst(state, seed2)
+            finalState = srs.doSearch()
             sys.exit()
 
         if srs.m_finalState == None:

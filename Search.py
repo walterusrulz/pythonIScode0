@@ -19,7 +19,6 @@ from Bishop import Bishop
 from Knight import Knight
 
 
-
 class Search:
     # member variables
     m_initialState = None
@@ -30,6 +29,9 @@ class Search:
     m_cost = 0.0
     m_piece = Piece()
     m_finalState = None
+    nVisited = 0
+    nGenerated = 0
+    nExpanded = 0
 
     # constructor
     def __init__(self, s0, seed):
@@ -72,5 +74,3 @@ class Search:
     # search method
     def doSearch(self):
         return None
-
-
