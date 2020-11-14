@@ -40,23 +40,12 @@ class State:
         else:
             return False
 
-    # hard copy of an State
-    def copy(self, memodict={}):
-        # print '__deepcopy__(%s)' % str(memo)
-        newState = State(self.m_board, self.m_agentPos, self.m_agent)
-        newState.__dict__.update(self.__dict__)
-        newState.m_board = copy.deepcopy(self.m_board, memodict)
-        newState.m_agentPos = copy.deepcopy(self.m_agentPos, memodict)
-        newState.m_agent = copy.deepcopy(self.m_agent, memodict)
-        newState.m_color = copy.deepcopy(self.m_color, memodict)
-        newState.m_boardSize = copy.deepcopy(self.m_boardSize, memodict)
 
-        return newState
 
     # apply a given action over the current state -which remains unmodified. Return a new state
 
-    def applyAction(self, action, memo):
-        newState = self.copy(memo)
+    def applyAction(self, action):
+        newState = copy.deepcopy(self)
         newState.m_board[action.m_initPos.row][action.m_initPos.col] = Utils.empty
         newState.m_board[action.m_finalPos.row][action.m_finalPos.col] = newState.m_agent
         newState.m_agentPos = action.m_finalPos

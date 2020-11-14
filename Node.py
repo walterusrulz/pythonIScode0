@@ -1,3 +1,5 @@
+import copy
+
 from State import State
 
 
@@ -13,4 +15,5 @@ class Node:
         self.state = state
         self.hashcode = -1
         self.action = action
+
 

@@ -4,7 +4,7 @@ import Utils
 from Search import Search
 from Node import Node
 import queue
-
+import copy
 
 class BreadthFirst(Search):
     # constructor
@@ -14,11 +14,10 @@ class BreadthFirst(Search):
     # search method
     def doSearch(self):
         self.m_solution = []
-        memo = {}
         visitedNodes = set()  # something more efficient needed
         open_nodes = queue.Queue()  # FIFO Queue
         # main loop
-        current = self.m_initialState.copy(memo)
+        current = copy.deepcopy(self.m_initialState)
         root_node = Node(None, current, None)
         root_node.hashcode = root_node.state.calculate_hash()
         open_nodes.put(root_node)
@@ -37,11 +36,12 @@ class BreadthFirst(Search):
                     # generate successors
                     possibleActions = self.m_piece.getPossibleActions(current_node.state)  # self references the Piece
                     for each_action in possibleActions:
-                        state_generated = current_node.state.applyAction(each_action,memo)
+                        print(each_action)
+                        state_generated0 = copy.deepcopy(current_node.state)
+                        state_generated = state_generated0.applyAction(each_action)
                         node_generated = Node(current_node, state_generated, each_action)
                         node_generated.hashcode = node_generated.state.calculate_hash()
                         open_nodes.put(node_generated)
-                        print(each_action)
                         self.nGenerated += 1
                     self.nExpanded += 1  # adding just explored node to visited
                     self.nVisited += 1
