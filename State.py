@@ -12,7 +12,6 @@ class State:
     m_agent = -1  # the type of piece
     m_color = 0  # 0 for white, 1 for black
     m_boardSize = -1
-    hash_number = -1
 
 
     #def __hash__(self):
@@ -52,6 +51,11 @@ class State:
 
         return newState
 
-    def calculate_hash(self):
-        my_hash = hash(self)
-        return my_hash
+    # def __eq__(self, other):
+    #    return self.m_agentPos.row == other.m_agentPos.row and self.m_agentPos.col == other.m_agentPos.col
+
+    def __hash__(self):
+        unique_total = 0
+        for each in self.m_board:
+            unique_total += sum(each)
+        return hash((self.m_agentPos.row, self.m_agentPos.col, self.m_agent, unique_total ))

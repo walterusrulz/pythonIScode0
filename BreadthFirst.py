@@ -19,10 +19,9 @@ class BreadthFirst(Search):
         # main loop
         current = copy.deepcopy(self.m_initialState)
         root_node = Node(None, current, None)
-        root_node.hashcode = root_node.state.calculate_hash()
+        root_node.hashcode = hash(root_node.state)
         open_nodes.put(root_node)
         self.nGenerated += 1
-
         while open_nodes.qsize() > 0:  # while the list is not empty
             current_node = open_nodes.get()
             if current_node.hashcode not in visitedNodes:
@@ -36,11 +35,11 @@ class BreadthFirst(Search):
                     # generate successors
                     possibleActions = self.m_piece.getPossibleActions(current_node.state)  # self references the Piece
                     for each_action in possibleActions:
-                        print(each_action)
+                        # print(each_action)
                         state_generated0 = copy.deepcopy(current_node.state)
                         state_generated = state_generated0.applyAction(each_action)
                         node_generated = Node(current_node, state_generated, each_action)
-                        node_generated.hashcode = node_generated.state.calculate_hash()
+                        node_generated.hashcode = hash(node_generated.state)
                         open_nodes.put(node_generated)
                         self.nGenerated += 1
                     self.nExpanded += 1  # adding just explored node to visited
