@@ -53,7 +53,11 @@ if __name__ == '__main__':
         elif algo == algos[1]:
             srs = BreadthFirst(state, seed2)
             finalState = srs.doSearch()
-            sys.exit()
+            srs.m_solution.reverse()
+            print("Generated nodes: %d" %srs.nGenerated)
+            print("Visited nodes: %d" %srs.nVisited)
+            print("Expanded nodes: %d" %srs.nExpanded)
+
 
         if srs.m_finalState == None:
             print("\nSorry, no solution found ....")

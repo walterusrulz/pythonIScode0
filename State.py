@@ -14,11 +14,9 @@ class State:
     m_boardSize = -1
     hash_number = -1
 
-    def __eq__(self, other):
-        return self.m_board == other.m_board and self.m_agentPos == other.m_agentPos and self.m_agent == other.m_agent and self.m_color == other.m_color and self.m_boardSize == other.m_boardSize
 
-    def __hash__(self):
-        return hash((self.m_board, self.m_agentPos, self.m_agent, self.m_color, self.m_boardSize))
+    #def __hash__(self):
+    #   return hash((self.m_board, self.m_agentPos, self.m_agent, self.m_color, self.m_boardSize))
 
     # constructor
     def __init__(self, board, position, agent):
@@ -57,8 +55,8 @@ class State:
 
     # apply a given action over the current state -which remains unmodified. Return a new state
 
-    def applyAction(self, action):
-        newState = self.copy()
+    def applyAction(self, action, memo):
+        newState = self.copy(memo)
         newState.m_board[action.m_initPos.row][action.m_initPos.col] = Utils.empty
         newState.m_board[action.m_finalPos.row][action.m_finalPos.col] = newState.m_agent
         newState.m_agentPos = action.m_finalPos
