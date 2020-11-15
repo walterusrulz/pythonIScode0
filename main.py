@@ -4,13 +4,15 @@ from SimpleRandomSearch import SimpleRandomSearch
 from BreadthFirst import BreadthFirst
 from DepthFirst import DepthFirst
 from UniformCost import UniformCost
+from Greedy import Greedy
+from Astar import Astar
 
 ######ENTRY POINT#######################################################################################################
 
 
 if __name__ == '__main__':
     # print(len(sys.argv))
-    algos = ["SimpleRandom","BreadthFirst", "DepthFirst", "Uniform"]
+    algos = ["SimpleRandom","BreadthFirst", "DepthFirst", "Uniform", "Greedy", "Astar"]
     if (len(sys.argv) != 7):
         print("\n**Sorry, correct usage require 5 params:");
         print("Board size: int.");
@@ -18,7 +20,7 @@ if __name__ == '__main__':
         print("Seed1: int. To initialize the problem instance random number generator (for reproducibility)");
         print("Agent: {0,1,2,3,4,5} standing for white pawn, rook, bishop, knight, queen or king.");
         print("Seed2: int. To initialize the Random Search instance random number generator (for reproducibility)");
-        print("Search algorithm: available SimpleRandom, BreadthFirst, DepthFirst", "Uniform")
+        print("Search algorithm: available SimpleRandom, BreadthFirst, DepthFirst", "Uniform", "Greedy", "Astar")
         sys.exit()
     else:
         size = int(sys.argv[1])
@@ -68,6 +70,20 @@ if __name__ == '__main__':
             print("Expanded nodes: %d" % srs.nExpanded)
         elif algo == algos[3]:
             srs = UniformCost(state, seed2)
+            finalState = srs.doSearch()
+            srs.m_solution.reverse()
+            print("Generated nodes: %d" % srs.nGenerated)
+            print("Visited nodes: %d" % srs.nVisited)
+            print("Expanded nodes: %d" % srs.nExpanded)
+        elif algo == algos[4]:
+            srs = Greedy(state, seed2)
+            finalState = srs.doSearch()
+            srs.m_solution.reverse()
+            print("Generated nodes: %d" % srs.nGenerated)
+            print("Visited nodes: %d" % srs.nVisited)
+            print("Expanded nodes: %d" % srs.nExpanded)
+        elif algo == algos[5]:
+            srs = Astar(state, seed2)
             finalState = srs.doSearch()
             srs.m_solution.reverse()
             print("Generated nodes: %d" % srs.nGenerated)
