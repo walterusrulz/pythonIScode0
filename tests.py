@@ -60,87 +60,32 @@ if __name__ == '__main__':
             print("\nSorry: bad selected algorithm, defaulting to SimpleRandom")
             algo = algos[0]
         # getting the initial state
-
-        if algo == algos[0]:
-            state = Utils.getProblemInstance(size, density, seed1, agent)
-            srs = SimpleRandomSearch(state, seed2)
-            finalState = srs.doSearch()
-        elif algo == algos[1]:
-            for each in range(10):
-                for each_other in range(10):
-                    density = 0.5
-                    state = Utils.getProblemInstance(size, density, each, agent)
+        for each in range(10):
+            for each_other in range(10):
+                density = 0.5
+                state = Utils.getProblemInstance(size, density, each, agent)
+                if algo == algos[0]:
+                    srs = SimpleRandomSearch(state, each_other)
+                elif algo == algos[1]:
                     srs = BreadthFirst(state, each_other)
-                    finalState = srs.doSearch()
-                    piece_data.append(finalState.state.m_agent)
-                    size_data.append(finalState.state.m_boardSize)
-                    prob_data.append(density)
-                    steps_sol.append(len(srs.m_solution))
-                    cost_sol.append(srs.m_cost)
-                    generated_nodes.append(srs.nGenerated)
-                    explored_nodes.append(srs.nVisited)
-                    expanded_nodes.append(srs.nExpanded)
-        elif algo == algos[2]:
-            for each in range(10):
-                for each_other in range(10):
-                    density = 0.5
-                    state = Utils.getProblemInstance(size, density, each, agent)
-                    srs = BreadthFirst(state, each_other)
-                    finalState = srs.doSearch()
-                    piece_data.append(finalState.state.m_agent)
-                    size_data.append(finalState.state.m_boardSize)
-                    prob_data.append(density)
-                    steps_sol.append(len(srs.m_solution))
-                    cost_sol.append(srs.m_cost)
-                    generated_nodes.append(srs.nGenerated)
-                    explored_nodes.append(srs.nVisited)
-                    expanded_nodes.append(srs.nExpanded)
-        elif algo == algos[3]:
-            for each in range(10):
-                for each_other in range(10):
-                    density = 0.5
-                    state = Utils.getProblemInstance(size, density, each, agent)
-                    srs = BreadthFirst(state, each_other)
-                    finalState = srs.doSearch()
-                    piece_data.append(finalState.state.m_agent)
-                    size_data.append(finalState.state.m_boardSize)
-                    prob_data.append(density)
-                    steps_sol.append(len(srs.m_solution))
-                    cost_sol.append(srs.m_cost)
-                    generated_nodes.append(srs.nGenerated)
-                    explored_nodes.append(srs.nVisited)
-                    expanded_nodes.append(srs.nExpanded)
-        elif algo == algos[4]:
-            for each in range(10):
-                for each_other in range(10):
-                    density = 0.5
-                    state = Utils.getProblemInstance(size, density, each, agent)
-                    srs = BreadthFirst(state, each_other)
-                    finalState = srs.doSearch()
-                    piece_data.append(finalState.state.m_agent)
-                    size_data.append(finalState.state.m_boardSize)
-                    prob_data.append(density)
-                    steps_sol.append(len(srs.m_solution))
-                    cost_sol.append(srs.m_cost)
-                    generated_nodes.append(srs.nGenerated)
-                    explored_nodes.append(srs.nVisited)
-                    expanded_nodes.append(srs.nExpanded)
-        elif algo == algos[5]:
-            for each in range(10):
-                for each_other in range(10):
-                    density = 0.5
-                    state = Utils.getProblemInstance(size, density, each, agent)
-                    srs = BreadthFirst(state, each_other)
-                    finalState = srs.doSearch()
-                    piece_data.append(finalState.state.m_agent)
-                    size_data.append(finalState.state.m_boardSize)
-                    prob_data.append(density)
-                    steps_sol.append(len(srs.m_solution))
-                    cost_sol.append(srs.m_cost)
-                    generated_nodes.append(srs.nGenerated)
-                    explored_nodes.append(srs.nVisited)
-                    expanded_nodes.append(srs.nExpanded)
-
+                elif algo == algos[2]:
+                    srs = DepthFirst(state, each_other)
+                elif algo == algos[3]:
+                    srs = UniformCost(state, each_other)
+                elif algo == algos[4]:
+                    srs = Greedy(state, each_other)
+                elif algo == algos[5]:
+                    srs = Astar(state, each_other)
+                # the algorithm itself
+                finalState = srs.doSearch()
+                piece_data.append(finalState.state.m_agent)
+                size_data.append(finalState.state.m_boardSize)
+                prob_data.append(density)
+                steps_sol.append(len(srs.m_solution))
+                cost_sol.append(srs.m_cost)
+                generated_nodes.append(srs.nGenerated)
+                explored_nodes.append(srs.nVisited)
+                expanded_nodes.append(srs.nExpanded)
 
     df = pandas.DataFrame({"Piece(nr)": piece_data,
                            "Size(board)": size_data,
