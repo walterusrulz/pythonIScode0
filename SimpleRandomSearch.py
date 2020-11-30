@@ -6,7 +6,7 @@
 # The process is quite simple. At each state we look for the agent possible actions and choose one at random.
 # The action is then applied and if the new state is final, the method stops returning the list of applied actions.
 # On the other hand, we iterate.
-
+import copy
 import sys
 import random
 import Utils
@@ -28,7 +28,7 @@ class SimpleRandomSearch(Search):
         noSolution = False
 
         # main loop
-        current = self.m_initialState.copy()
+        current = copy.deepcopy(self.m_initialState)
         while not (solutionFound):
             if current.isFinal():  # first we check if the state is final
                 solutionFound = True
