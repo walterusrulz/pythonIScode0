@@ -30,7 +30,7 @@ class BreadthFirst(Search):
                     self.nVisited += 1
                     self.recover_path(current_node)
                     self.m_finalState = current_node.state
-                    return current_node
+                    return current_node.state
                 else:
                     # generate successors
                     possibleActions = self.m_piece.getPossibleActions(current_node.state)  # self references the Piece
@@ -44,7 +44,7 @@ class BreadthFirst(Search):
                         self.nGenerated += 1
                     self.nExpanded += 1  # adding just explored node to visited
                     self.nVisited += 1
-        return current_node
+        return current_node.state
 
     def recover_path(self, current_node):
         while not current_node.progenitor is None:

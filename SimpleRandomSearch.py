@@ -26,16 +26,19 @@ class SimpleRandomSearch(Search):
         solutionFound = False
         # current = None
         noSolution = False
-
         # main loop
         current = copy.deepcopy(self.m_initialState)
         while not (solutionFound):
             if current.isFinal():  # first we check if the state is final
                 solutionFound = True
                 self.m_finalState = current
+                self.nVisited += 1
             else:
                 # generate successors
+                self.nVisited += 1
+                self.nExpanded += 1
                 possibleActions = self.m_piece.getPossibleActions(current)
+                self.nGenerated += len(possibleActions)
                 # for a in possibleActions:
                 #	print (a.m_initPos, a.m_finalPos)
                 # rnd = random.randint(0,len(possibleActions)-1)
@@ -49,5 +52,3 @@ class SimpleRandomSearch(Search):
                 current = current.applyAction(action)
 
         return current
-
-

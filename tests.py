@@ -78,8 +78,8 @@ if __name__ == '__main__':
                     srs = Astar(state, each_other)
                 # the algorithm itself
                 finalState = srs.doSearch()
-                piece_data.append(finalState.state.m_agent)
-                size_data.append(finalState.state.m_boardSize)
+                piece_data.append(finalState.m_agent)
+                size_data.append(finalState.m_boardSize)
                 prob_data.append(density)
                 steps_sol.append(len(srs.m_solution))
                 cost_sol.append(srs.m_cost)
